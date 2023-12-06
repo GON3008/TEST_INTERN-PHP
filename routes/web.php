@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -19,7 +19,7 @@ use App\Http\Controllers\AuthController;
 //     return view('welcome');
 // });
 
-Route::get('/', [CategoryController::class, 'index']);
+Route::get('/', [ProductController::class, 'index']);
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'register'])->name('register');
@@ -29,7 +29,7 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::resource('categories', CategoryController::class)->middleware('auth');
+    Route::resource('products', ProductController::class)->middleware('auth');
     Route::delete('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

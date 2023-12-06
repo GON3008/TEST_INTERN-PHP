@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-<h1>Create Category</h1>
+<h1>Create Product</h1>
 
 @if (\Session::has('msg'))
     <div class="alert alert-success">
@@ -10,7 +10,7 @@
 
 @section('content')
     <div class="container">
-        <form action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
 
             @csrf
 
@@ -45,7 +45,7 @@
 
             <div class="d-flex gap-3">
                 <span class="pt-3">
-                    <a href="{{ route('categories.index') }}" class="btn btn-info">Back</a>
+                    <a href="{{ route('products.index') }}" class="btn btn-info">Back</a>
                 </span>
                 <button class="btn btn-primary my-3" type="submit">Submit</button>
             </div>

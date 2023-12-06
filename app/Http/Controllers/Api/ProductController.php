@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Category;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
+use App\Models\Product;
 
-
-class CategoryController extends Controller {
+class ProductController extends Controller
+{
     public function index() {
         try {
-            $data = Category::query()->latest()->paginate(5);
+            $data = Product::query()->latest()->paginate(5);
 
             return response()->json($data);
+
         } catch (\Exception $e) {
+            
             Log::error('Exception', [$e]);
 
             return response()->json([], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -27,7 +29,7 @@ class CategoryController extends Controller {
     public function store() {
 
         $validator = \Validator::make(\request()->all(), [
-            'name' => 'required | max:100 | unique:lists',
+            'name' => 'required | max:100 | unique:products',
             'price' => 'required | numeric ',
             'img' => ' image | nullable',
             'description' => 'nullable',
@@ -37,17 +39,17 @@ class CategoryController extends Controller {
             return response()->json($validator->errors());
         }
 
-        Category::create(\request()->all());
+        Product::create(\request()->all());
 
         return response()->json([], Response::HTTP_CREATED);
     }
 
 
-    public function update(Category $category) {
+    public function update(Product $product) {
         $validator = \Validator::make(\request()->all(), [
-            'name' => 'required | max:100 | unique:categories',
+            'name' => 'required | max:100 | unique:products',
             'price' => 'required | numeric ',
-            'img' => 'required | image | nullable',
+            'img' => ' image | nullable',
             'description' => 'nullable',
         ]);
 
@@ -55,13 +57,13 @@ class CategoryController extends Controller {
             return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $category->update(\request()->all());
+        $product->update(\request()->all());
 
         return \response()->json([], Response::HTTP_OK);
     }
 
-    public function destroy(Category $category) {
-        $category->delete();
+    public function destroy(Product $product) {
+        $product->delete();
 
         return \response()->json([], Response::HTTP_OK);
     }

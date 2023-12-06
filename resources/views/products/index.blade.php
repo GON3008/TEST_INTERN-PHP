@@ -4,11 +4,11 @@
     <div class="container-fluid">
 
         <div class="align-items-center mb-4">
-            <h1 class=" mb-0 text-gray-800">List</h1>
+            <h1 class=" mb-0 text-gray-800">List Product</h1>
 
             <div class="d-flex justify-content-end gap-4">
                 @auth
-                    <a href="{{ route('categories.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                    <a href="{{ route('products.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                         Add New
                     </a>
                     <span>
@@ -68,9 +68,9 @@
 
                             <td class="d-flex gap-4">
                                 @if (auth()->check())
-                                    <a href="{{ route('categories.edit', $item) }}" class="btn btn-info mt-2">Edit</a>
+                                    <a href="{{ route('products.edit', $item) }}" class="btn btn-info mt-2">Edit</a>
 
-                                    <form action="{{ route('categories.destroy', $item) }}" method="post">
+                                    <form action="{{ route('products.destroy', $item) }}" method="post">
                                         @csrf
                                         @method('DELETE')
 
